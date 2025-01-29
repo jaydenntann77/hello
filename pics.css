@@ -1,0 +1,92 @@
+/* General Page Styles */
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    background: linear-gradient(to bottom, #a3d5ff, #d6e6ff);
+    margin: 0;
+    overflow-x: hidden;
+}
+
+/* Title Styling */
+h1 {
+    font-family: 'Poppins', sans-serif;
+    font-size: 2rem;
+    color: #2c3e50;
+    text-align: center;
+    margin: 20px 0;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* Scrollable Container */
+.gallery-container {
+    width: 100vw;
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding: 20px 0;
+}
+
+/* Hide Scrollbar */
+.gallery-container::-webkit-scrollbar {
+    display: none;
+}
+
+/* Horizontal Gallery Layout */
+.gallery {
+    display: flex;
+    flex-direction: row;
+    gap: 25px;
+    padding: 0 20px;
+}
+
+/* Image Styling */
+.gallery img {
+    height: 500px; /* Fixed height for consistency */
+    width: auto;
+    object-fit: cover;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: transform 200ms ease;
+    box-shadow: 3px 5px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Hover Effect */
+.gallery img:hover {
+    transform: scale(1.05);
+}
+
+.back-arrow {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    background: #19427D;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 20px;
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: 600;
+    transition: all 0.2s ease;
+}
+
+.back-arrow:hover {
+    background: #143566;
+    transform: scale(1.05);
+}
+
+.gif {
+    height: 250px
+}
+
+.gif-container {
+    display: flex;
+    justify-content: center; /* Centers the GIFs */
+    align-items: center;
+    gap: 20px; /* Space between GIFs */
+}
+
+.gif {
+    height: 250px; /* Adjust as needed */
+
+}

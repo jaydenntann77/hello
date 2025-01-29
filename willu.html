@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minimal Valentine</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #84cbfd, #164469);
+            font-family: 'Inter', sans-serif;
+        }
+
+        .container {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(25, 66, 125, 0.1);
+            text-align: center;
+            max-width: 500px;
+            width: 90%;
+        }
+
+        h1 {
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+            font-size: 2.2rem;
+            color: #19427D;
+            margin-bottom: 2rem;
+            line-height: 1.3;
+        }
+
+        .options {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin: 2rem 0;
+            flex-wrap: wrap;
+        }
+
+        .option-label {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            cursor: pointer;
+            padding: 1rem 2rem;
+            border-radius: 12px;
+            transition: all 0.2s ease;
+            border: 1.5px solid #19427D;
+            background: white;
+        }
+
+        .option-label:hover {
+            background: #F5F9FF;
+            transform: translateY(-2px);
+        }
+
+        input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            accent-color: #19427D;
+            cursor: pointer;
+        }
+
+        button {
+            background: #19427D;
+            color: white;
+            border: none;
+            padding: 1rem 3rem;
+            border-radius: 8px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-weight: 600;
+            width: 100%;
+            max-width: 200px;
+        }
+
+        button:hover {
+            background: #143566;
+            transform: scale(1.02);
+        }
+
+        button:disabled {
+            background: #CFD8E6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        #response-message {
+            color: #19427D;
+            margin-top: 1.5rem;
+            font-weight: 500;
+        }
+
+        img {
+            margin-left: 20px;
+            height: 400px
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 1.5rem;
+            }
+            
+            h1 {
+                font-size: 1.8rem;
+            }
+            
+            .option-label {
+                padding: 0.8rem 1.5rem;
+            }
+        }
+
+        /* Header Styling */
+.header {
+    position: absolute;
+    top: 30px;
+    text-align: center;
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: white;
+    width: 100%;
+}
+
+/* Adjust layout */
+.main-content {
+    display: flex;
+    align-items: center;
+    gap: 30px; /* Space between the form and GIF */
+}
+
+
+    </style>
+</head>
+<body>
+
+
+        <div class="header">
+            <h2>dear gwen...</h2>
+        </div>
+    
+        <div class="main-content">
+            <div class="container">
+                <h1>will you be my valentine?</h1>
+                <form id="valentineForm">
+                    <div class="options">
+                        <label class="option-label">
+                            <input type="checkbox" name="response" value="yes"> yes
+                        </label>
+                        <label class="option-label">
+                            <input type="checkbox" name="response" value="no"> no
+                        </label>
+                    </div>
+                    <button type="submit" disabled>submit</button>
+                </form>
+                <p id="response-message" class="hidden"></p>
+            </div>
+            <img id="valentineGif" src="images/87ef6ed8ae181b11405390ff3f080272.gif" alt="Cute Valentine GIF">
+        </div>
+
+    <script>
+        const gif = document.getElementById('valentineGif');
+
+        gif.addEventListener('mouseenter', () => {
+            gif.src = gif.src.split("?")[0] + "?a=" + Math.random(); // Forces reload
+        });
+    </script>
+
+    <script>
+        const form = document.getElementById('valentineForm');
+        const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+        const submitBtn = document.querySelector('button');
+        const responseMessage = document.getElementById('response-message');
+
+        checkboxes.forEach(checkbox => {
+            checkbox.addEventListener('change', (e) => {
+                checkboxes.forEach(cb => {
+                    if (cb !== e.target) cb.checked = false;
+                });
+                submitBtn.disabled = !e.target.checked;
+                responseMessage.classList.add('hidden');
+            });
+        });
+
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const response = document.querySelector('input[name="response"]:checked').value;
+            
+            if (response === 'yes') {
+                window.location.href = 'accepted.html';
+            } else {
+                responseMessage.textContent = "nooo 😢😢😢 please try again :(((";
+                responseMessage.classList.remove('hidden');
+                checkboxes.forEach(cb => cb.checked = false);
+                submitBtn.disabled = true;
+            }
+        });
+    </script>
+</body>
+</html>
